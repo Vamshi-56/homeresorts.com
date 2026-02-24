@@ -347,11 +347,145 @@ footer{
         font-size:28px;
     }
 }
+/* ================= PREMIUM INTRO ================= */
+/* ================= PREMIUM INTRO ================= */
 
+#intro-loader{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:5000;
+    transition:opacity 0.8s ease;
+}
+
+.intro-logo{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2e7d32,#66bb6a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+    font-weight:bold;
+    color:#fff;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    transition:all 1.6s cubic-bezier(.77,0,.18,1);
+    box-shadow:0 25px 60px rgba(0,0,0,0.2);
+    display: flex;
+}
+
+/* Final navbar position */
+.intro-logo.to-navbar{
+    top:-22px;
+    left:60px;
+    transform:translate(0,0) scale(0.20);
+    box-shadow:none;
+}
+/* .intro-logo.move{
+    box-shadow:none;
+} */
+/* Hide navbar logo initially */
+.logo-icon{
+    opacity:0;
+}
+
+.logo-icon.active{
+    opacity:1;
+    transition:opacity 0.4s ease;
+}
+
+/* ================= CINEMATIC INTRO ================= */
+
+#intro-loader{
+    position:fixed;
+    width:100%;
+    height:100vh;
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:5000;
+    transition:opacity 0.8s ease;
+}
+
+.intro-content{
+    text-align:center;
+}
+
+.intro-logo{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#2e7d32,#66bb6a);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:55px;
+    font-weight:bold;
+    color:#fff;
+    margin:auto;
+    transition:transform 1.5s cubic-bezier(.77,0,.18,1);
+    box-shadow:0 25px 60px rgba(0,0,0,0.2);
+}
+
+.intro-text{
+    margin-top:25px;
+    font-size:38px;
+    font-weight:700;
+    letter-spacing:4px;
+    color:#2e7d32;
+    font-family:'Segoe UI', sans-serif;
+    display:flex;
+    justify-content:center;
+    gap:5px;
+}
+
+.intro-text span{
+    opacity:0;
+    transform:scale(0.5);
+    display:inline-block;
+    transition:all 0.3s ease;
+}
+
+.intro-text span.show{
+    opacity:1;
+    transform:scale(1.2);
+}
+
+.intro-text span.fade{
+    opacity:0;
+    transform:scale(0.5);
+}
+
+/* Hide navbar logo initially */
+.logo-icon{
+    opacity:0;
+    transition:opacity 0.4s ease;
+}
+
+.logo-icon.active{
+    opacity:1;
+}   
 </style>
 </head>
 
 <body>
+<!-- INTRO LOADER -->
+<!-- INTRO LOADER -->
+<div id="intro-loader">
+    <div class="intro-content">
+        <div class="intro-logo" id="introLogo">HN</div>
+        <div class="intro-text" id="introText"></div>
+    </div>
+</div>
 
 <header>
 <nav>
@@ -447,12 +581,89 @@ footer{
 
 </div>
 </section>
-
+    
 <footer>
 <p>© 2026 HOME NATURE Resort | All Rights Reserved</p>
 </footer>
 
 <script>
+   
+window.addEventListener("load", function(){
+
+    const introLogo = document.getElementById("introLogo");
+    const introText = document.getElementById("introText");
+    const loader = document.getElementById("intro-loader");
+    const navLogo = document.querySelector(".logo-icon");
+
+    const text = "HOME NATURE";
+
+    // Hide navbar logo initially
+    navLogo.style.opacity = "0";
+
+    /* STEP 1: Type letters one by one */
+    setTimeout(() => {
+
+        text.split("").forEach((letter, index) => {
+
+            const span = document.createElement("span");
+            span.textContent = letter;
+            introText.appendChild(span);
+
+            setTimeout(() => {
+                span.classList.add("show");
+            }, index * 120); // typing speed
+
+        });
+
+    }, 800);
+
+
+    /* STEP 2: Fade out text after fully typed */
+    setTimeout(() => {
+
+        const spans = document.querySelectorAll(".intro-text span");
+
+        spans.forEach((span, index) => {
+            setTimeout(() => {
+                span.classList.add("fade");
+            }, index * 50);
+        });
+
+    }, 2500);
+
+
+    /* STEP 3: Move logo to navbar */
+    setTimeout(() => {
+
+        const introRect = introLogo.getBoundingClientRect();
+        const navRect = navLogo.getBoundingClientRect();
+
+        const deltaX = (navRect.left + navRect.width/2) -
+                       (introRect.left + introRect.width/2);
+
+        const deltaY = (navRect.top + navRect.height/2) -
+                       (introRect.top + introRect.height/2);
+
+        const scaleValue = navRect.width / introRect.width;
+
+        introLogo.style.transform =
+            `translate(${deltaX}px, ${deltaY}px) scale(${scaleValue})`;
+
+    }, 3300);
+
+
+    /* STEP 4: Show navbar logo & remove intro */
+    setTimeout(() => {
+        navLogo.classList.add("active");
+        loader.style.opacity = "0";
+    }, 4800);
+
+    setTimeout(() => {
+        loader.style.display = "none";
+    }, 5500);
+
+});
+
 function toggleMenu(){
     var nav = document.getElementById("navLinks");
     var icon = document.querySelector(".menu-toggle");

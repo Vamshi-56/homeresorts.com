@@ -55,6 +55,13 @@ nav{
     margin-right:10px;
 }
 
+.logo-icon img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+}
+
 .logo-text{
     font-size:22px;
     font-weight:bold;
@@ -279,37 +286,31 @@ footer{
     padding:20px;
 }
 
+/* ===== SCROLL POP ANIMATION (ADDED) ===== */
+.scroll-animate{
+    opacity:0;
+    transform:translateY(60px) scale(0.9);
+    transition:all 0.8s ease;
+}
+
+.scroll-animate.show{
+    opacity:1;
+    transform:translateY(0) scale(1);
+}
+
 /* ===== RESPONSIVE ===== */
 @media screen and (max-width:992px){
-    .rooms-container{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .gallery{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .contact-container{
-        grid-template-columns:1fr;
-    }
+    .rooms-container{ grid-template-columns:repeat(2,1fr); }
+    .gallery{ grid-template-columns:repeat(2,1fr); }
+    .contact-container{ grid-template-columns:1fr; }
 }
 
 @media screen and (max-width:768px){
-
-    header{
-        padding:15px 20px;
-    }
-
-    /* SHOW MENU ICON */
-    .menu-toggle{
-        display:block;
-        z-index:1001;
-    }
-
-    /* NAV DROPS FROM TOP */
+    header{ padding:15px 20px; }
+    .menu-toggle{ display:block; }
     .nav-links{
         position:absolute;
-        top:-400px;   /* Hidden above */
+        top:-400px;
         left:0;
         width:100%;
         background:#fff;
@@ -319,181 +320,28 @@ footer{
         box-shadow:0 5px 20px rgba(0,0,0,0.1);
         transition:0.5s ease;
     }
-
-    /* ACTIVE STATE */
-    .nav-links.active{
-        top:70px;   /* Slides down */
-    }
-
-    /* MENU ITEM ANIMATION */
-    .nav-links li{
-        margin:20px 0;
-        opacity:0;
-        transform:translateY(-15px);
-        transition:0.4s ease;
-    }
-
-    .nav-links.active li{
-        opacity:1;
-        transform:translateY(0);
-    }
-
+    .nav-links.active{ top:70px; }
+    .nav-links li{ margin:20px 0; }
     .rooms-container,
-    .gallery{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-}
-/* ================= PREMIUM INTRO ================= */
-/* ================= PREMIUM INTRO ================= */
-
-#intro-loader{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:#ffffff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:5000;
-    transition:opacity 0.8s ease;
+    .gallery{ grid-template-columns:1fr; }
+    .hero h1{ font-size:28px; }
 }
 
-.intro-logo{
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#2e7d32,#66bb6a);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:55px;
-    font-weight:bold;
-    color:#fff;
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    transition:all 1.6s cubic-bezier(.77,0,.18,1);
-    box-shadow:0 25px 60px rgba(0,0,0,0.2);
-    display: flex;
-}
-
-/* Final navbar position */
-.intro-logo.to-navbar{
-    top:-22px;
-    left:60px;
-    transform:translate(0,0) scale(0.20);
-    box-shadow:none;
-}
-/* .intro-logo.move{
-    box-shadow:none;
-} */
-/* Hide navbar logo initially */
-.logo-icon{
-    opacity:0;
-}
-
-.logo-icon.active{
-    opacity:1;
-    transition:opacity 0.4s ease;
-}
-
-/* ================= CINEMATIC INTRO ================= */
-
-#intro-loader{
-    position:fixed;
-    width:100%;
-    height:100vh;
-    background:#ffffff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:5000;
-    transition:opacity 0.8s ease;
-}
-
-.intro-content{
-    text-align:center;
-}
-
-.intro-logo{
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#2e7d32,#66bb6a);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:55px;
-    font-weight:bold;
-    color:#fff;
-    margin:auto;
-    transition:transform 1.5s cubic-bezier(.77,0,.18,1);
-    box-shadow:0 25px 60px rgba(0,0,0,0.2);
-}
-
-.intro-text{
-    margin-top:25px;
-    font-size:38px;
-    font-weight:700;
-    letter-spacing:4px;
-    color:#2e7d32;
-    font-family:'Segoe UI', sans-serif;
-    display:flex;
-    justify-content:center;
-    gap:5px;
-}
-
-.intro-text span{
-    opacity:0;
-    transform:scale(0.5);
-    display:inline-block;
-    transition:all 0.3s ease;
-}
-
-.intro-text span.show{
-    opacity:1;
-    transform:scale(1.2);
-}
-
-.intro-text span.fade{
-    opacity:0;
-    transform:scale(0.5);
-}
-
-/* Hide navbar logo initially */
-.logo-icon{
-    opacity:0;
-    transition:opacity 0.4s ease;
-}
-
-.logo-icon.active{
-    opacity:1;
-}   
 </style>
 </head>
 
 <body>
-<!-- INTRO LOADER -->
-<!-- INTRO LOADER -->
-<div id="intro-loader">
-    <div class="intro-content">
-        <div class="intro-logo" id="introLogo">HN</div>
-        <div class="intro-text" id="introText"></div>
-    </div>
-</div>
 
 <header>
 <nav>
     <div class="logo-container">
-        <div class="logo-icon">HN</div>
-        <div class="logo-text">HOME NATURE</div>
+    <div class="logo-icon">
+        <a href="logo.pdf">
+            <img src="Nature logo.jpg.jpeg" alt="Home Nature Logo">
+        </a>
     </div>
-
+    <div class="logo-text">HOME NATURE</div>
+</div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
     <ul class="nav-links" id="navLinks">
@@ -516,17 +364,17 @@ footer{
 <section id="rooms">
 <h2>Our Rooms</h2>
 <div class="rooms-container">
-    <div class="room">
+    <div class="room scroll-animate">
         <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=800&q=80">
         <h3>Deluxe Room</h3>
         <p>Modern luxury with beautiful natural surroundings.</p>
     </div>
-    <div class="room">
+    <div class="room scroll-animate">
         <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80">
         <h3>Family Suite</h3>
         <p>Spacious and comfortable for family vacations.</p>
     </div>
-    <div class="room">
+    <div class="room scroll-animate">
         <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=800&q=80">
         <h3>Private Villa</h3>
         <p>Premium private stay with exclusive facilities.</p>
@@ -537,10 +385,10 @@ footer{
 <section id="gallery">
 <h2>Resort Gallery</h2>
 <div class="gallery">
-    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=80">
-    <img src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210ff?auto=format&fit=crop&w=800&q=80">
+    <img class="scroll-animate" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80">
+    <img class="scroll-animate" src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=80">
+    <img class="scroll-animate" src="https://images.unsplash.com/photo-1528909514045-2fa4ac7a08ba?auto=format&fit=crop&w=800&q=80">
+    <img class="scroll-animate" src="https://images.unsplash.com/photo-1501117716987-c8e1ecb210ff?auto=format&fit=crop&w=800&q=80">
 </div>
 </section>
 
@@ -549,7 +397,7 @@ footer{
 
 <div class="contact-container">
 
-<div class="contact-info">
+<div class="contact-info scroll-animate">
 <h3>HOME NATURE Resort</h3>
 <p>Experience nature like never before. Book your stay or send us your questions — we’re here for you 24/7.</p>
 <div class="info-box">📍 Green Valley Road, Paradise City</div>
@@ -557,7 +405,7 @@ footer{
 <div class="info-box">✉ contact@homenature.com</div>
 </div>
 
-<div class="contact-form">
+<div class="contact-form scroll-animate">
 <form id="contactForm">
 <div class="input-group">
 <input type="text" id="name" required>
@@ -581,100 +429,18 @@ footer{
 
 </div>
 </section>
-    
+
 <footer>
 <p>© 2026 HOME NATURE Resort | All Rights Reserved</p>
 </footer>
 
 <script>
-   
-window.addEventListener("load", function(){
-
-    const introLogo = document.getElementById("introLogo");
-    const introText = document.getElementById("introText");
-    const loader = document.getElementById("intro-loader");
-    const navLogo = document.querySelector(".logo-icon");
-
-    const text = "HOME NATURE";
-
-    // Hide navbar logo initially
-    navLogo.style.opacity = "0";
-
-    /* STEP 1: Type letters one by one */
-    setTimeout(() => {
-
-        text.split("").forEach((letter, index) => {
-
-            const span = document.createElement("span");
-            span.textContent = letter;
-            introText.appendChild(span);
-
-            setTimeout(() => {
-                span.classList.add("show");
-            }, index * 120); // typing speed
-
-        });
-
-    }, 800);
-
-
-    /* STEP 2: Fade out text after fully typed */
-    setTimeout(() => {
-
-        const spans = document.querySelectorAll(".intro-text span");
-
-        spans.forEach((span, index) => {
-            setTimeout(() => {
-                span.classList.add("fade");
-            }, index * 50);
-        });
-
-    }, 2500);
-
-
-    /* STEP 3: Move logo to navbar */
-    setTimeout(() => {
-
-        const introRect = introLogo.getBoundingClientRect();
-        const navRect = navLogo.getBoundingClientRect();
-
-        const deltaX = (navRect.left + navRect.width/2) -
-                       (introRect.left + introRect.width/2);
-
-        const deltaY = (navRect.top + navRect.height/2) -
-                       (introRect.top + introRect.height/2);
-
-        const scaleValue = navRect.width / introRect.width;
-
-        introLogo.style.transform =
-            `translate(${deltaX}px, ${deltaY}px) scale(${scaleValue})`;
-
-    }, 3300);
-
-
-    /* STEP 4: Show navbar logo & remove intro */
-    setTimeout(() => {
-        navLogo.classList.add("active");
-        loader.style.opacity = "0";
-    }, 4800);
-
-    setTimeout(() => {
-        loader.style.display = "none";
-    }, 5500);
-
-});
 
 function toggleMenu(){
     var nav = document.getElementById("navLinks");
     var icon = document.querySelector(".menu-toggle");
-
     nav.classList.toggle("active");
-
-    if(nav.classList.contains("active")){
-        icon.innerHTML = "✖";
-    }else{
-        icon.innerHTML = "☰";
-    }
+    icon.innerHTML = nav.classList.contains("active") ? "✖" : "☰";
 }
 
 function bookNow(){
@@ -702,6 +468,20 @@ document.getElementById("contactForm").addEventListener("submit", function(e){
     successMsg.innerText = "✅ Message Sent Successfully! We will contact you soon.";
     document.getElementById("contactForm").reset();
 });
+
+/* ===== SCROLL POP EFFECT (ADDED) ===== */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            entry.target.classList.add("show");
+        }
+    });
+}, { threshold: 0.2 });
+
+document.querySelectorAll(".scroll-animate").forEach((el) => {
+    observer.observe(el);
+});
+
 </script>
 
 </body>
